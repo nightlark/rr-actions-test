@@ -34,5 +34,6 @@ jobs:
           LD_LIBRARY_PATH="$PWD/rr-5.4.0-Linux-x86_64/lib:$PWD/rr-5.4.0-Linux-x86_64/lib/rr:$LD_LIBRARY_PATH"
           which rr
           sudo sysctl -w kernel.perf_event_paranoid=1
+          perf record true
           rr record true --args
           ls
