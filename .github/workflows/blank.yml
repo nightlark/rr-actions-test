@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: Run a multi-line script
+      - name: Try running rr
         run: |
           wget https://github.com/rr-debugger/rr/releases/download/5.4.0/rr-5.4.0-Linux-x86_64.tar.gz
           tar xvf rr-5.4.0-Linux-x86_64.tar.gz
@@ -33,6 +33,9 @@ jobs:
           export PATH
           LD_LIBRARY_PATH="$PWD/rr-5.4.0-Linux-x86_64/lib:$PWD/rr-5.4.0-Linux-x86_64/lib/rr:$LD_LIBRARY_PATH"
           which rr
-          sudo sysctl -w kernel.perf_event_paranoid=1
+          sudo sysctl -w kernel.perf_event_paranoid=0
+          sudo $(which rr) --help
           sudo $(which rr) record true --args
-          ls
+
+      - name: List files
+        run: ls
