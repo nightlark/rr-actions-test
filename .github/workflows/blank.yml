@@ -35,7 +35,8 @@ jobs:
           which rr
           sudo sysctl -w kernel.perf_event_paranoid=0
           sudo $(which rr) --help
-          sudo $(which rr) record true --args
+          sudo $(which rr) record $(which true) --args
 
       - name: List files
+        if: always()
         run: ls
