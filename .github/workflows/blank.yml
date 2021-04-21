@@ -35,7 +35,7 @@ jobs:
           which rr
           sudo sysctl -w kernel.perf_event_paranoid=0
           sudo $(which rr) --help
-          sudo $(which rr) record $(which true) --args
+          RR_LOG=all:debug sudo $(which rr) record $(which true)
 
       - name: List files
         if: always()
